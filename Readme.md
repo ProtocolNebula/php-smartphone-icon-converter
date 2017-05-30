@@ -1,5 +1,6 @@
-# PHP-XamarinIconConverter
-This script convert an app Icon to all necessary sizes in Xamarin (current only configured for ```iOs``` and ```Android```).
+# PHP-Smartphone Icon Converter
+This script convert an app Icon to all necessary sizes for the platform (including all necessary for Xamarin).
+For now is only configured for ```iOs``` and ```Android```.
 
 You can add any other configuration in ```config.php``` file.
 
@@ -21,9 +22,8 @@ If is the second time you do it and all files are already registered, you can di
 
 
 ## TODO:
- [ ] Generate a ZIP with "out" folder
- 
- [ ] Use "SESSIONS" to manage multiple users/conversion at same time
+* [ ]  Generate a ZIP with "out" folder
+* [ ]  Use "SESSIONS" to manage multiple users/conversion at same time
 
 ## IMPORTANT:
 The files only will be readed by "Xamarin" (Visual Studio) if you import them via IDE and NOT ONLY copying the files to Resource dir from Windows Explorer.
