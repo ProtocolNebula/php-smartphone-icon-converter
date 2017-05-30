@@ -1,0 +1,90 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	...
+	...
+	
+	-->
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Icon-60@2x.png</string>
+		<string>Icon-76.png</string>
+		<string>Icon-76@2x.png</string>
+		<string>Icon-83.png</string>
+		<string>Icon-83@2x.png</string>
+		<string>Default.png</string>
+		<string>Default@2x.png</string>
+		<string>Default-568</string>
+		<string>Default-568h@2x.png</string>
+		<string>Default-Portrait.png</string>
+		<string>Default-Portrait@2x.png</string>
+		<string>Icon-Small-40.png</string>
+		<string>Icon-Small-40@2x.png</string>
+		<string>Icon-Small.png</string>
+		<string>Icon-Small@2x.png</string>
+	</array>
+	<key>UILaunchImages</key>
+	<array>
+	<dict>
+	  <key>UILaunchImageName</key>
+	  <string>Default-568h</string>
+	  <key>UILaunchImageSize</key>
+	  <string>{320, 568}</string>
+	</dict>
+	<dict>
+	  <key>UILaunchImageMinimumOSVersion</key>
+	  <string>7.0</string>
+	  <key>UILaunchImageName</key>
+	  <string>Default-568h</string>
+	  <key>UILaunchImageOrientation</key>
+	  <string>Portrait</string>
+	  <key>UILaunchImageSize</key>
+	  <string>{320, 480}</string>
+	</dict>
+	<dict>
+	  <key>UILaunchImageMinimumOSVersion</key>
+	  <string>7.0</string>
+	  <key>UILaunchImageName</key>
+	  <string>Default-568h</string>
+	  <key>UILaunchImageOrientation</key>
+	  <string>Landscape</string>
+	  <key>UILaunchImageSize</key>
+	  <string>{320, 480}</string>
+	</dict>
+	<dict>
+	  <key>UILaunchImageMinimumOSVersion</key>
+	  <string>7.0</string>
+	  <key>UILaunchImageName</key>
+	  <string>Default-568h</string>
+	  <key>UILaunchImageOrientation</key>
+	  <string>Portrait</string>
+	  <key>UILaunchImageSize</key>
+	  <string>{320, 568}</string>
+	</dict>
+	<dict>
+	  <key>UILaunchImageMinimumOSVersion</key>
+	  <string>7.0</string>
+	  <key>UILaunchImageName</key>
+	  <string>Default-568h</string>
+	  <key>UILaunchImageOrientation</key>
+	  <string>Landscape</string>
+	  <key>UILaunchImageSize</key>
+	  <string>{320, 568}</string>
+	</dict>
+	</array>
+  
+	<key>UIRequiresFullScreen</key>
+	<string>YES</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string></string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+<!--
+...
+...
+</dict>
+</plist>
+-->
