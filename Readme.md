@@ -22,8 +22,10 @@ If is the second time you do it and all files are already registered, you can di
 
 
 ## TODO:
-* [ ]  Generate a ZIP with "out" folder
-* [ ]  Use "SESSIONS" to manage multiple users/conversion at same time
+* [ ]  Refactor code
+* [ ]  Translate comments
+* [ ]  Improve design
+* [ ]  Show examples/real time examples with JavaScript before send
 
 ## IMPORTANT:
 The files only will be readed by "Xamarin" (Visual Studio) if you import them via IDE and NOT ONLY copying the files to Resource dir from Windows Explorer.
