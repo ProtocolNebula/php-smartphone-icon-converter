@@ -8,8 +8,6 @@ define('OUT_DIR', TMP_DIR . 'out/');
 define('VIEW_DIR', APP_DIR . 'view/');
 include APP_DIR . 'lib/DirectoryManager.php';
 
-include VIEW_DIR . 'header.php';
-
 if ($_POST) {
 	
 	// Temporal ID for this session
@@ -61,6 +59,8 @@ if ($_POST) {
 	// Cleaning directories olders than 60 seconds (if broked script)
 	DirectoryManager::delete(TMP_DIR, false, true, true, 60);
 }
+
+include VIEW_DIR . 'header.php';
 ?>
 
 
