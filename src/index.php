@@ -4,7 +4,11 @@ session_start();
 define('APP_DIR', __DIR__ . '/');
 define('TMP_DIR', APP_DIR . 'tmp/');
 define('OUT_DIR', TMP_DIR . 'out/');
+//define('PUBLIC_DIR', APP_DIR . 'public/');
+define('VIEW_DIR', APP_DIR . 'view/');
 include APP_DIR . 'lib/DirectoryManager.php';
+
+include VIEW_DIR . 'header.php';
 
 if ($_POST) {
 	
@@ -59,7 +63,18 @@ if ($_POST) {
 }
 ?>
 
-<form method="post" enctype="multipart/form-data">
-	<b>Icono <u>.png</u> (recomendado 1024x1024): </b> <input type="file" name="icon" /><br />
-	<input type="submit" value="Convertir" name="submit"/>
-</form>
+
+<div class="jumbotron">
+    <h1>Convert your icons!</h1>
+    <p class="lead">
+        Choose you icon (1024x1024 minimum recommended) in PNG format.
+    </p>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="icon" /><br />
+        <input type="submit" value="Convert" name="submit" class="btn btn-lg btn-success"/>
+    </form>
+</div>
+
+
+
+<?php include VIEW_DIR . 'footer.php'; ?>
