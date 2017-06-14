@@ -31,16 +31,13 @@ function convertImages() {
         mkdir(OUT_DIR, 0777, true);
     }
 
-    include APP_DIR . 'config.php';
-    include APP_DIR . 'lib/functions.php';
-
     $tmpIcon = TMP_SESSION_DIR . 'original.png';
     if (is_file($tmpIcon)) {
         unlink($tmpIcon);
     }
     move_uploaded_file($_FILES['icon']['tmp_name'], $tmpIcon);
 
-    foreach ($sizes as $os => $size) {
+    foreach ($GLOBALS['sizes'] as $os => $size) {
         $path = TMP_SESSION_DIR . $os . '/';
         if (!is_dir($path)) {
             mkdir($path, 0777, true);
@@ -53,12 +50,12 @@ function convertImages() {
                     mkdir($subPath, 0777, true);
 
                 $bg = isset($data['bg']) ? $data['bg'] : '';
-                doResize($tmpIcon, $subPath . $data['fileName'], $data['width'], $data['height'], $bg);
+                Thumbs::doResize($tmpIcon, $subPath . $data['fileName'], $data['width'], $data['height'], $bg);
             }
         } else {
             foreach ($size as $name => $data) {
                 $bg = isset($data['bg']) ? $data['bg'] : '';
-                doResize($tmpIcon, $path . $name, $data['width'], $data['height'], $bg);
+                Thumbs::doResize($tmpIcon, $path . $name, $data['width'], $data['height'], $bg);
             }
         }
     }
