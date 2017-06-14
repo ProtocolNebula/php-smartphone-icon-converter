@@ -20,12 +20,5 @@ In VisualStudio (or your IDE), go to ```yourApp.Droid``` / ```yourApp.iOs``` -> 
 
 If is the second time you do it and all files are already registered, you can directly replace the ```Resource``` folder in each platform.
 
-
-## TODO:
-* [ ]  Refactor code
-* [ ]  Translate comments
-* [ ]  Improve design
-* [ ]  Show examples/real time examples with JavaScript before send
-
 ## IMPORTANT:
 The files only will be readed by "Xamarin" (Visual Studio) if you import them via IDE and NOT ONLY copying the files to Resource dir from Windows Explorer.
