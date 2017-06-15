@@ -18,6 +18,11 @@ function downloadZip($file, $nameToShow, $delete = true) {
  * Function executed on index.php when POST petition is received
  */
 function convertImages() {
+    if (isset($_SESSION['last_conversion']) and $_SESSION['last_conversion'] + SECONDS_BETWEEN_CONVERSIONS > time()) {
+        return 'Please, wait ' . SECONDS_BETWEEN_CONVERSIONS . ' seconds between each conversion';
+    }
+    $_SESSION['last_conversion'] = time();
+    
     // Temporal ID for this session
     //$tmp_session = session_id() . time();
     $tmp_session = session_id();
