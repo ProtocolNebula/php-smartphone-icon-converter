@@ -35,8 +35,12 @@ function convertImages() {
     if (is_file($tmpIcon)) {
         unlink($tmpIcon);
     }
+    
     move_uploaded_file($_FILES['icon']['tmp_name'], $tmpIcon);
 
+    $resource = Thumbs::createSrcFromImage($tmpIcon);
+    if (!$resource) return 'Check image file type and dimensions';
+    
     foreach ($GLOBALS['sizes'] as $os => $size) {
         $path = TMP_SESSION_DIR . $os . '/';
         if (!is_dir($path)) {
@@ -50,15 +54,17 @@ function convertImages() {
                     mkdir($subPath, 0777, true);
 
                 $bg = isset($data['bg']) ? $data['bg'] : '';
-                Thumbs::doResize($tmpIcon, $subPath . $data['fileName'], $data['width'], $data['height'], $bg);
+                Thumbs::doResize($resource, $subPath . $data['fileName'], $data['width'], $data['height'], $bg);
             }
         } else {
             foreach ($size as $name => $data) {
                 $bg = isset($data['bg']) ? $data['bg'] : '';
-                Thumbs::doResize($tmpIcon, $path . $name, $data['width'], $data['height'], $bg);
+                Thumbs::doResize($resource, $path . $name, $data['width'], $data['height'], $bg);
             }
         }
     }
+    
+    imagedestroy($resource);
 
     // Make ZIP
     $fileDownload = OUT_DIR . $tmp_session . '.zip';

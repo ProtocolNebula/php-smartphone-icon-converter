@@ -4,7 +4,7 @@ class Thumbs {
 
     /**
      * Redimensiona una imagen
-     * @param string $src Ruta de origen
+     * @param string|resource $src Ruta de origen|Resource generado de Thumbs::createSrcFromImage
      * @param string $dst Ruta de destino
      * @param numeric $width Nuevo ancho
      * @param numeric $height Nuevo alto
@@ -12,14 +12,22 @@ class Thumbs {
      */
     static function doResize($src, $dst, $width, $height, $bgColor = 'transparent') {
         // Obtener los nuevos tamaños
-        list($originalWidth, $originalHeight) = getimagesize($src);
+        
 
         // Cargamos los buffers para la conversion
-        $src = self::createSrcFromImage($src);
         if (!$src) {
             return false;
+        } else if (is_string($src)) {
+            $resource = self::createSrcFromImage($src);
+            list($originalWidth, $originalHeight) = getimagesize($src);
+        } else {
+            $resource = $src;
+            print_r($resource);
+            die();
+            list ($originalWidth, $originalHeight) = $resource;
         }
-        $src = self::resizeToFit($src, $originalWidth, $originalHeight, $width, $height);
+        
+        $resource = self::resizeToFit($resource, $originalWidth, $originalHeight, $width, $height);
 
 
         $new = imagecreatetruecolor($width, $height);
@@ -38,25 +46,33 @@ class Thumbs {
         //imagecopyresampled($new, $src, 0, 0, 0, 0, $width, $height, $originalWidth, $originalHeight);
         $widthCenter = $width / 2 - ($originalWidth / 2);
         $heightCenter = $height / 2 - ($originalHeight / 2);
-        imagecopy($new, $src, $widthCenter, $heightCenter, 0, 0, $originalWidth, $originalHeight);
+        imagecopy($new, $resource, $widthCenter, $heightCenter, 0, 0, $originalWidth, $originalHeight);
 
         // Guardamos
         imagepng($new, $dst, 9);
+        
+        imagedestroy($new);
+        if (is_string($src)) {
+            imagedestroy($resource);
+        }
     }
 
     
     static function createSrcFromImage($src) {
 
-        if (@$info_imagen = getimagesize($imagen)) {
-            switch ($info_imagen['mime']) {
+        if (@$info_image = getimagesize($src)) {
+            switch ($info_image['mime']) {
                 case "image/jpeg":
-                    if (@$imagen_fuente = imagecreatefromjpeg($imagen)) return $imagen_fuente;
+                    @$src = imagecreatefromjpeg($src);
+                    if ($src) return $src;
                     break;
                 case "image/gif":
-                    if (@$imagen_fuente = imagecreatefromgif($imagen)) return $imagen_fuente;
+                    @$src = imagecreatefromgif($src);
+                    if ($src) return $src;
                     break;
                 case "image/png":
-                    if (@$imagen_fuente = imagecreatefrompng($imagen)) return $imagen_fuente;
+                    @$src = imagecreatefrompng($src);
+                    if ($src) return $src;
                     break;
             }
         }

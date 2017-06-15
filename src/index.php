@@ -19,7 +19,7 @@ if ($_POST) {
     }
     
     if (!$res) {
-        $res = 'Check image type and dimensions';
+        $res = 'An unknown error ocurred';
     }
     
 } else {
@@ -30,8 +30,8 @@ if ($_POST) {
 include VIEW_DIR . 'header.php';
 if (isset($res) and $res !== true) {
     echo '<div class="alert alert-danger" role="alert">',
-        '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>',
-        '<span class="sr-only">Error:</span>',
+        '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> ',
+        '<span class="sr-only">Error:</span> ',
         $res,
     '</div>';
 }
