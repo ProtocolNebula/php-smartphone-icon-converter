@@ -1,34 +1,60 @@
 <?php
-
 class Thumbs {
+
+    private $imagePath;
+    private $info_image;
+    private $resource;
+            
+    function __construct($pathImage) {
+        $this->setImage($pathImage);
+    }
+    
+    function __destruct() {
+        $this->destroyResource();
+    }
+    
+    function destroyResource() {
+        if ($this->resource) {
+            imagedestroy($this->resource);
+        }
+    }
+
+    /**
+     * Change the current image to transform
+     * @param type $path
+     * @throws Exception
+     */
+    function setImage($path) {
+        
+        $this->destroyResource();
+        
+        if (!is_file($path)) { throw new Exception('The file ' . $path . ' no exist', 0); }
+        $this->imagePath = $path;
+        
+        $this->info_image = getimagesize($path);
+        if (!$this->info_image) { throw new Exception('The uploaded file is not an image', 1); }
+        
+        $this->resource = $this->createSrcFromImage();
+        if (!$this->resource) { throw new Exception('The uploaded file is not an image', 2); }
+        
+    }
 
     /**
      * Redimensiona una imagen
-     * @param string|resource $src Ruta de origen|Resource generado de Thumbs::createSrcFromImage
-     * @param string $dst Ruta de destino
-     * @param numeric $width Nuevo ancho
-     * @param numeric $height Nuevo alto
-     * @param string $bgColor Color de fondo (transparent, white)
+     * @param string $dst Destination file
+     * @param numeric $width New width
+     * @param numeric $height New height
+     * @param string $bgColor Background color (transparent, white)
      */
-    static function doResize($src, $dst, $width, $height, $bgColor = 'transparent') {
+    function doResize($dst, $width, $height, $bgColor = 'transparent') {
         // Obtener los nuevos tamaños
-        
-
-        // Cargamos los buffers para la conversion
-        if (!$src) {
+        if (!$this->resource) {
             return false;
-        } else if (is_string($src)) {
-            $resource = self::createSrcFromImage($src);
-            list($originalWidth, $originalHeight) = getimagesize($src);
-        } else {
-            $resource = $src;
-            print_r($resource);
-            die();
-            list ($originalWidth, $originalHeight) = $resource;
-        }
+        } 
         
-        $resource = self::resizeToFit($resource, $originalWidth, $originalHeight, $width, $height);
-
+        list ($originalWidth, $originalHeight) = $this->info_image;
+        
+        $resource = $this->resizeToFit($this->resource, $originalWidth, $originalHeight, $width, $height);
 
         $new = imagecreatetruecolor($width, $height);
 
@@ -52,29 +78,23 @@ class Thumbs {
         imagepng($new, $dst, 9);
         
         imagedestroy($new);
-        if (is_string($src)) {
-            imagedestroy($resource);
-        }
     }
 
     
-    static function createSrcFromImage($src) {
-
-        if (@$info_image = getimagesize($src)) {
-            switch ($info_image['mime']) {
-                case "image/jpeg":
-                    @$src = imagecreatefromjpeg($src);
-                    if ($src) return $src;
-                    break;
-                case "image/gif":
-                    @$src = imagecreatefromgif($src);
-                    if ($src) return $src;
-                    break;
-                case "image/png":
-                    @$src = imagecreatefrompng($src);
-                    if ($src) return $src;
-                    break;
-            }
+    function createSrcFromImage() {
+        switch ($this->info_image['mime']) {
+            case "image/jpeg":
+                @$src = imagecreatefromjpeg($this->imagePath);
+                if ($src) return $src;
+                break;
+            case "image/gif":
+                @$src = imagecreatefromgif($this->imagePath);
+                if ($src) return $src;
+                break;
+            case "image/png":
+                @$src = imagecreatefrompng($this->imagePath);
+                if ($src) return $src;
+                break;
         }
         
         return false;
@@ -88,7 +108,7 @@ class Thumbs {
      * @param numeric $newWidth Anchura maxima de la nueva imagen
      * @param numeric $newHeight Altura maxima de la nueva imagen
      */
-    static function resizeToFit($src, &$originalWidth, &$originalHeight, $newWidth, $newHeight) {
+    function resizeToFit($src, &$originalWidth, &$originalHeight, $newWidth, $newHeight) {
         $currentWidth = $originalWidth;
         $currentHeight = $originalHeight;
 
