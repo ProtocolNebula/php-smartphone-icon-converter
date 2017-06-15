@@ -1,5 +1,4 @@
 <?php
-
 include APP_DIR . 'lib/thumbs.php';
 include APP_DIR . 'lib/pclzip.lib.php';
 
@@ -31,16 +30,21 @@ function convertImages() {
         mkdir(OUT_DIR, 0777, true);
     }
 
-    include APP_DIR . 'config.php';
-    include APP_DIR . 'lib/functions.php';
-
     $tmpIcon = TMP_SESSION_DIR . 'original.png';
     if (is_file($tmpIcon)) {
         unlink($tmpIcon);
     }
+    
+    // TODO: Make a thumb base if image is too large
     move_uploaded_file($_FILES['icon']['tmp_name'], $tmpIcon);
 
-    foreach ($sizes as $os => $size) {
+    try {
+        $thumbs = new Thumbs($tmpIcon);
+    } catch (Exception $ex) {
+        return 'Check image file type, dimensions and size';
+    }
+    
+    foreach ($GLOBALS['sizes'] as $os => $size) {
         $path = TMP_SESSION_DIR . $os . '/';
         if (!is_dir($path)) {
             mkdir($path, 0777, true);
@@ -53,15 +57,17 @@ function convertImages() {
                     mkdir($subPath, 0777, true);
 
                 $bg = isset($data['bg']) ? $data['bg'] : '';
-                doResize($tmpIcon, $subPath . $data['fileName'], $data['width'], $data['height'], $bg);
+                $thumbs->doResize($subPath . $data['fileName'], $data['width'], $data['height'], $bg);
             }
         } else {
             foreach ($size as $name => $data) {
                 $bg = isset($data['bg']) ? $data['bg'] : '';
-                doResize($tmpIcon, $path . $name, $data['width'], $data['height'], $bg);
+                $thumbs->doResize($path . $name, $data['width'], $data['height'], $bg);
             }
         }
     }
+    
+    unset($thumbs);
 
     // Make ZIP
     $fileDownload = OUT_DIR . $tmp_session . '.zip';
@@ -70,7 +76,7 @@ function convertImages() {
 
     // Delete temp directory for this user
     DirectoryManager::delete(TMP_SESSION_DIR, true, true, true, 0);
-
+    
     // Download the file
     downloadZip($fileDownload, 'Mobile-Icons', true);
 }
