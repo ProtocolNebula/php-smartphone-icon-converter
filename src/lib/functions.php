@@ -83,5 +83,5 @@ function convertImages() {
     DirectoryManager::delete(TMP_SESSION_DIR, true, true, true, 0);
     
     // Download the file
-    downloadZip($fileDownload, 'Mobile-Icons', true);
+    downloadZip($fileDownload, 'Mobile-Icons.zip', true);
 }
