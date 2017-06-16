@@ -1,9 +1,13 @@
 <?php
 // APP Settings:
-//define('MAX_FILE_SIZE', '5242880'); // In Bytes (default 5 MB)
+define('MAX_FILE_SIZE', '5242880'); // In Bytes (default 5 MB) - 0 disable this (server limit)
 
-// AVOID DDOS: minimum time between conversions
-define('SECONDS_BETWEEN_CONVERSIONS', '10'); // In seconds (0 = disable this)
+if ($_SERVER['HTTP_HOST'] == 'localhost') {
+    // AVOID DDOS: minimum time between conversions
+    define('SECONDS_BETWEEN_CONVERSIONS', '10'); // In seconds (0 = disable this)
+} else {
+    define('SECONDS_BETWEEN_CONVERSIONS', '0');
+}
 
 
 // Icons Settings:

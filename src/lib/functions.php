@@ -40,8 +40,15 @@ function convertImages() {
         unlink($tmpIcon);
     }
     
+    $tmpName = $_FILES['icon']['tmp_name'];
+           //MAX_FILE_SIZE
+    
+    
+    if (filesize($tmpName) > MAX_FILE_SIZE) return 'Limit image size: ' . MAX_FILE_SIZE . ' bytes.';
+    
+    
     // TODO: Make a thumb base if image is too large
-    move_uploaded_file($_FILES['icon']['tmp_name'], $tmpIcon);
+    move_uploaded_file($tmpName, $tmpIcon);
 
     try {
         $thumbs = new Thumbs($tmpIcon);
