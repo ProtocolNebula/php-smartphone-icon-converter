@@ -41,11 +41,8 @@ function convertImages() {
     }
     
     $tmpName = $_FILES['icon']['tmp_name'];
-           //MAX_FILE_SIZE
-    
     
     if (MAX_FILE_SIZE and filesize($tmpName) > MAX_FILE_SIZE) return 'Limit image size: ' . MAX_FILE_SIZE . ' bytes.';
-    
     
     // TODO: Make a thumb base if image is too large
     move_uploaded_file($tmpName, $tmpIcon);
