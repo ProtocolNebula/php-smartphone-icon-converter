@@ -44,7 +44,7 @@ function convertImages() {
            //MAX_FILE_SIZE
     
     
-    if (filesize($tmpName) > MAX_FILE_SIZE) return 'Limit image size: ' . MAX_FILE_SIZE . ' bytes.';
+    if (MAX_FILE_SIZE and filesize($tmpName) > MAX_FILE_SIZE) return 'Limit image size: ' . MAX_FILE_SIZE . ' bytes.';
     
     
     // TODO: Make a thumb base if image is too large
