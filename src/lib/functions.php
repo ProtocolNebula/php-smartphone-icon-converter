@@ -3,6 +3,8 @@ include APP_DIR . 'lib/thumbs.php';
 include APP_DIR . 'lib/pclzip.lib.php';
 include APP_DIR . 'lib/ServerStatus.php';
 
+define('MAX_FILE_SIZE_HUMANREADEABLE', ServerStatus::convertByte(MAX_FILE_SIZE));
+
 function downloadZip($file, $nameToShow, $delete = true) {
 
     header("Content-type: application/zip");
@@ -43,7 +45,7 @@ function convertImages() {
     
     $tmpName = $_FILES['icon']['tmp_name'];
     
-    if (MAX_FILE_SIZE and filesize($tmpName) > MAX_FILE_SIZE) return 'Limit image size: ' . ServerStatus::convertByte(MAX_FILE_SIZE) . '.';
+    if (MAX_FILE_SIZE and filesize($tmpName) > MAX_FILE_SIZE) return 'Limit image size: ' . MAX_FILE_SIZE_HUMANREADEABLE . '.';
     
     // TODO: Make a thumb base if image is too large
     move_uploaded_file($tmpName, $tmpIcon);

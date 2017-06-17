@@ -5,6 +5,9 @@
     </p>
     <form method="post" enctype="multipart/form-data">
         <input type="file" name="icon" /><br />
+        <p class="lead">
+            File max size: <b><?php echo MAX_FILE_SIZE_HUMANREADEABLE; ?></b>
+        </p>
         <input type="submit" value="Convert" name="submit" class="btn btn-lg btn-success"/>
     </form>
 </div>
