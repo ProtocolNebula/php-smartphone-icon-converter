@@ -1,6 +1,7 @@
 <?php
 include APP_DIR . 'lib/thumbs.php';
 include APP_DIR . 'lib/pclzip.lib.php';
+include APP_DIR . 'lib/ServerStatus.php';
 
 function downloadZip($file, $nameToShow, $delete = true) {
 
@@ -42,7 +43,7 @@ function convertImages() {
     
     $tmpName = $_FILES['icon']['tmp_name'];
     
-    if (MAX_FILE_SIZE and filesize($tmpName) > MAX_FILE_SIZE) return 'Limit image size: ' . MAX_FILE_SIZE . ' bytes.';
+    if (MAX_FILE_SIZE and filesize($tmpName) > MAX_FILE_SIZE) return 'Limit image size: ' . ServerStatus::convertByte(MAX_FILE_SIZE) . '.';
     
     // TODO: Make a thumb base if image is too large
     move_uploaded_file($tmpName, $tmpIcon);
