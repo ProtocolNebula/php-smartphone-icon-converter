@@ -13,7 +13,7 @@ You can add any other configuration in ```config.php``` file.
 6. Once end, you can get the files from ```out``` directory
 
 ## How to use Remotelly (without download):
-**IN DEVELOPMENT**
+https://icons.racs.es/
 
 ## After conversion:
 In VisualStudio (or your IDE), go to ```yourApp.Droid``` / ```yourApp.iOs``` -> ```Resources``` and import the files (maybe you need to delete first the old).
