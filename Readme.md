@@ -2,6 +2,9 @@
 This script convert an app Icon to all necessary sizes for the platform (including all necessary for **Xamarin**).
 For now is only configured for ```iOs```, ```Android``` and ```UWP```. You can add any other configuration in ```config.php``` file.
 
+## How to use Remotelly (without download):
+https://icons.racs.es/
+
 ## How to use LOCALLY:
 1. Download / clone the project in your Apache/Nginx server (with php)
 2. Copy ```src``` content and set execute and write permissions to the folder (the script will create **temp**)
@@ -9,9 +12,6 @@ For now is only configured for ```iOs```, ```Android``` and ```UWP```. You can a
 4. Execute the script through Web Explorer (http://yourip/php-smartphone-icon-converter)
 5. Upload the file
 6. Once end, you get a .zip file to download
-
-## How to use Remotelly (without download):
-https://icons.racs.es/
 
 ## After conversion:
 In VisualStudio (or your IDE), go to ```yourApp.Droid``` / ```yourApp.iOs``` -> ```Resources``` and import the files (maybe you need to delete first the old).
