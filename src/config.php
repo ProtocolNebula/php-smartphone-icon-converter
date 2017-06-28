@@ -13,7 +13,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
 // Icons Settings:
 /*
     Output Sizes:
-    'OS (ANDROID|IOS|WPH)'=>array(
+    'OS (ANDROID|IOS|UWP)'=>array(
             // NOTA: En el caso de ANDROID, en lugar de "archivo" es el directorio donde se incluira
             'nombre_archivo'=>array(
                     'width' => '',
@@ -50,4 +50,34 @@ $sizes = array(
         'Icon-Small-40@2x.png'=>array('width'=>80, 'height'=>80, 'bg'=>'white'),
         'Icon-Small-40@3x.png'=>array('width'=>120, 'height'=>120, 'bg'=>'white'),
     ),
+	// UWP (windows)
+	'UWP'=>array(
+		'LockScreenLogo.scale-100.png'=>array('width'=>24, 'height'=>24),
+		'LockScreenLogo.scale-125.png'=>array('width'=>30, 'height'=>30),
+		'LockScreenLogo.scale-150.png'=>array('width'=>36, 'height'=>36),
+		'LockScreenLogo.scale-200.png'=>array('width'=>48, 'height'=>48),
+		'LockScreenLogo.scale-400.png'=>array('width'=>96, 'height'=>96),
+		'SplashScreen.scale-100.png'=>array('width'=>620, 'height'=>300),
+		'SplashScreen.scale-125.png'=>array('width'=>775, 'height'=>375),
+		'SplashScreen.scale-150.png'=>array('width'=>930, 'height'=>450),
+		'SplashScreen.scale-200.png'=>array('width'=>1240, 'height'=>600),
+		'SplashScreen.scale-400.png'=>array('width'=>2480, 'height'=>1200),
+		'Square44x44Logo.scale-100.png'=>array('width'=>44, 'height'=>44),
+		'Square44x44Logo.scale-125.png'=>array('width'=>55, 'height'=>55),
+		'Square44x44Logo.scale-150.png'=>array('width'=>66, 'height'=>66),
+		'Square44x44Logo.scale-200.png'=>array('width'=>88, 'height'=>88),
+		'Square44x44Logo.scale-400.png'=>array('width'=>176, 'height'=>176),
+		'Square44x44Logo.targetsize-16_altform-unplated.png'=>array('width'=>16, 'height'=>16),
+		'Square44x44Logo.targetsize-24_altform-unplated.png'=>array('width'=>24, 'height'=>24),
+		'Square44x44Logo.targetsize-32_altform-unplated.png'=>array('width'=>32, 'height'=>32),
+		'Square44x44Logo.targetsize-48_altform-unplated.png'=>array('width'=>48, 'height'=>48),
+		'Square44x44Logo.targetsize-256_altform-unplated.png'=>array('width'=>256, 'height'=>256),
+		'Square150x150Logo.scale-200.png'=>array('width'=>300, 'height'=>300),
+		'StoreLogo.png'=>array('width'=>50, 'height'=>50),
+		'Wide310x150Logo.scale-100.png'=>array('width'=>310, 'height'=>150),
+		'Wide310x150Logo.scale-125.png'=>array('width'=>388, 'height'=>188),
+		'Wide310x150Logo.scale-150.png'=>array('width'=>465, 'height'=>225),
+		'Wide310x150Logo.scale-200.png'=>array('width'=>620, 'height'=>300),
+		'Wide310x150Logo.scale-400.png'=>array('width'=>1240, 'height'=>600),
+	),
 );
