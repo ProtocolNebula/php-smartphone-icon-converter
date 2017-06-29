@@ -1,7 +1,7 @@
 <div class="jumbotron">
     <h1>Convert your icons!</h1>
     <p class="lead">
-        Choose you icon (1024x1024 minimum recommended) in PNG/JPG/GIF format.
+        Choose you icon (1024x1024 recommended) in PNG/JPG/GIF format.
     </p>
     <form method="post" enctype="multipart/form-data">
         <input type="file" name="icon" /><br />
