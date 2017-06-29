@@ -11,3 +11,4 @@
         <input type="submit" value="Convert" name="submit" class="btn btn-lg btn-success"/>
     </form>
 </div>
+<script src="public/js/file_uploader.js"></script>
