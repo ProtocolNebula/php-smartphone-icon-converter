@@ -92,3 +92,23 @@ function convertImages() {
     // Download the file
     downloadZip($fileDownload, 'Mobile-Icons.zip', true);
 }
+
+
+/**
+ * This will export a JS constant from PHP
+ * You must call this function into script tag
+ * @param string $name Name of the constant
+ * @param object $data Content of constant
+ */
+function exportValueToJS($name, $data) {
+	echo 'var ' , $name , '=';
+	if (is_string($data) or is_numeric($data)) {
+		// Export literally
+		echo '"' , $data , '"';
+	} else {
+		// Convert to JSON
+		echo json_encode($data);
+	}
+	echo ';',PHP_EOL;
+}
+	

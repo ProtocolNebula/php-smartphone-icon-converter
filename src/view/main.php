@@ -11,4 +11,12 @@
         <input type="submit" value="Convert" name="submit" class="btn btn-lg btn-success"/>
     </form>
 </div>
+
+<script>
+// Variables readed from PHP Config
+<?php
+exportValueToJS('MAX_FILE_SIZE', MAX_FILE_SIZE);
+//exportValueToJS('SIZES', $sizes); // For real time conversion
+?>
+</script>
 <script src="public/js/file_uploader.js"></script>
