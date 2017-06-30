@@ -10,12 +10,10 @@
         </p>
         
         
-        <div class="checkbox">
+        <div id="destinationOs" class="checkbox">
             <b>CONVERT TO:</b><br />
             <?php foreach ($sizes as $device=>$d) { ?>
-                <label>
-                    <input name="convertTo[<?php echo $device; ?>]" value="true" type="checkbox" checked> <?php echo $device; ?> 
-                </label>
+                <label><input name="convertTo[<?php echo $device; ?>]" value="true" type="checkbox" checked> <?php echo $device; ?></label>
             <?php } ?>
         </div>
         <br />
