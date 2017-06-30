@@ -26,6 +26,10 @@ function convertImages() {
     }
     $_SESSION['last_conversion'] = time();
     
+    if (!isset($_POST['convertTo']) or empty($_POST['convertTo'])) {
+        return 'Please, choose at least 1 device to export';
+    }
+    
     // Temporal ID for this session
     //$tmp_session = session_id() . time();
     $tmp_session = session_id();
@@ -55,8 +59,11 @@ function convertImages() {
     } catch (Exception $ex) {
         return 'Check image file type, dimensions and size';
     }
-    
+
     foreach ($GLOBALS['sizes'] as $os => $size) {
+        // Is this OS unchecked from convert?
+        if (!isset($_POST['convertTo'][$os])) continue;
+        
         $path = TMP_SESSION_DIR . $os . '/';
         if (!is_dir($path)) {
             mkdir($path, 0777, true);
