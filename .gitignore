@@ -1,3 +1,3 @@
 tmp/
 /nbproject/
-/src/*.php
+/src/config/*.php
