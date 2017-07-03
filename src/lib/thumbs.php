@@ -55,7 +55,7 @@ class Thumbs {
         list ($originalWidth, $originalHeight) = $this->info_image;
         
         $resource = $this->resizeToFit($this->resource, $originalWidth, $originalHeight, $width, $height);
-
+        
         $new = imagecreatetruecolor($width, $height);
 
         if ($bgColor == 'white') {
@@ -126,8 +126,8 @@ class Thumbs {
 
         if ($currentHeight > $newHeight) {
             //if the height is greather than supplied thumbnail size
+            $currentWidth = ($newHeight / $currentHeight) * $currentWidth;
             $currentHeight = $newHeight;
-            $currentWidth = ($currentHeight / $originalHeight) * $currentWidth;
         }
 
         // Preparamos la base de la imagen redimensionada
@@ -140,8 +140,9 @@ class Thumbs {
         // Redimensionamos
         imagecopyresampled($new, $src, 0, 0, 0, 0, $currentWidth, $currentHeight, $originalWidth, $originalHeight);
 
-        $originalWidth = $currentWidth;
-        $originalHeight = $currentHeight;
+        // Actualizamos los datos que tiene que recibir la funcion que lo ha llamado
+        $originalWidth = round($currentWidth);
+        $originalHeight = round($currentHeight);
 
         return $new;
     }
