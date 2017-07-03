@@ -6,8 +6,13 @@ define('TMP_DIR', APP_DIR . 'tmp/');
 define('OUT_DIR', TMP_DIR . 'out/');
 //define('PUBLIC_DIR', APP_DIR . 'public/');
 define('VIEW_DIR', APP_DIR . 'view/');
+
+if (!is_file(APP_DIR . 'config/app.php')) copy(APP_DIR . 'config/app.php.default', APP_DIR . 'config/app.php');
 include APP_DIR . 'config/app.php';
+
+if (!is_file(APP_DIR . 'config/sizes.php')) copy(APP_DIR . 'config/sizes.php.default', APP_DIR . 'config/sizes.php');
 include APP_DIR . 'config/sizes.php';
+
 include APP_DIR . 'lib/functions.php';
 include APP_DIR . 'lib/DirectoryManager.php';
 
