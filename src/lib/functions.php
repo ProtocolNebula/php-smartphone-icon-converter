@@ -108,14 +108,14 @@ function convertImages() {
  * @param object $data Content of constant
  */
 function exportValueToJS($name, $data) {
-	echo 'var ' , $name , '=';
-	if (is_string($data) or is_numeric($data)) {
-		// Export literally
-		echo '"' , $data , '"';
-	} else {
-		// Convert to JSON
-		echo json_encode($data);
-	}
-	echo ';',PHP_EOL;
+    echo 'var ' , $name , '=';
+    if (is_string($data) or is_numeric($data)) {
+        // Export literally
+        echo '"' , $data , '"';
+    } else {
+        // Convert to JSON
+        echo json_encode($data);
+    }
+    echo ';',PHP_EOL;
 }
 	
