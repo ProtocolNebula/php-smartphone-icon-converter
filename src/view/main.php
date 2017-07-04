@@ -4,7 +4,7 @@
         Choose you icon (1024x1024 recommended) in PNG/JPG/GIF format.
     </p>
     <form name="submitConversion" method="post" enctype="multipart/form-data">
-        <input type="file" name="icon" /><br />
+        <input type="file" name="icon" accept="image/*" /><br />
         <p class="lead">
             File max size: <b><?php echo MAX_FILE_SIZE_HUMANREADEABLE; ?></b>
         </p>
@@ -28,4 +28,5 @@ exportValueToJS('MAX_FILE_SIZE', MAX_FILE_SIZE);
 //exportValueToJS('SIZES', $sizes); // For real time conversion
 ?>
 </script>
+
 <script src="public/js/file_uploader.js"></script>
