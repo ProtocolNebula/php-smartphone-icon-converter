@@ -88,9 +88,30 @@ function checkFileMime(file) {
  * @param {type} img
  * @returns {undefined}
  */
+var ctx;
 function doResize(img) {
 
     resize(img, 100, 300);
+    
+    var save = new Image();
+    save.src = canvas.toDataURL();
+    
+    //var imgContent = canvas.toDataURL("image/jpg");
+    var imgContent = save.src.substr(save.src.indexOf(',')+1);
+    
+    console.log(imgContent);
+    
+    
+    var zip = new JSZip();
+    //zip.file("Hello.txt", "Hello World\n");
+    var img = zip.folder("images");
+    img.file("smile.jpeg", imgContent, {base64: true});
+    //img.file("smile.jpg", imgContent, {binary: true});
+    zip.generateAsync({type:"blob"})
+    .then(function(content) {
+        // see FileSaver.js
+        saveAs(content, "converted.zip");
+    });
 
 }
 
@@ -124,7 +145,7 @@ function resize(img, toWidth, toHeight) {
     
     canvas.width = width;
     canvas.height = height;
-    var ctx = canvas.getContext("2d");
+    ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0, width, height);
     ctx.fill();
     
