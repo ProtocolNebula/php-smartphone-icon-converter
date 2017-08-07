@@ -19,6 +19,8 @@
         <br />
         <input type="submit" value="Convert" name="submit" class="btn btn-lg btn-success"/>
     </form>
+    
+    <canvas id="canvas" style="height: 300px; width: 300px; "></canvas>
 </div>
 
 <script>

@@ -32,7 +32,20 @@ function checkFile() {
     file = fileUpload.files[0];
     if (checkFileSize(file) && checkFileMime(file)) {
         console.log("resizing");
-        resize(file, 300, 300);
+        
+        // Alternativa:
+        //    var img = document.createElement("img");
+        //    img.src = window.URL.createObjectURL(file);
+        
+        // Abrimos la imagen y preparamos un callback para cuando haya cargado
+        var img = document.createElement("img");
+        img.onload = function() { doResize(img); };
+  
+        // Cargamos en memoria la imagen
+        var reader = new FileReader();
+        reader.onload = function(e) { img.src = e.target.result }
+        reader.readAsDataURL(file);
+        
         console.log("resized");
         return true;
     }
@@ -69,26 +82,33 @@ function checkFileMime(file) {
     };
     reader.readAsDataURL(input.files[0]);
 }*/
-  
-function resize(file, toWidth, toHeight) {
-    // THANKS TO: https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
-    console.log(file);
-//    var img = document.createElement("img");
-//    img.src = window.URL.createObjectURL(file);
 
-    var img = document.createElement("img");
-    var reader = new FileReader();
-    reader.onload = function(e) {img.src = e.target.result}
-    reader.readAsDataURL(file);
+/**
+ * Redimensiona la imagen a los tamaños necesarios
+ * @param {type} img
+ * @returns {undefined}
+ */
+function doResize(img) {
 
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
+    resize(img, 100, 300);
+
+}
+
+/**
+ * Redimensiona la imagen a un tamaño especifico
+ * @param {type} img
+ * @param {type} toWidth
+ * @param {type} toHeight
+ * @link https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
+ * @returns {undefined}
+ */
+function resize(img, toWidth, toHeight) {
 
     var MAX_WIDTH = 800;
     var MAX_HEIGHT = 600;
-    var width = img.width;
-    var height = img.height;
+    
+    var width = img.naturalWidth;
+    var height = img.naturalHeight;
 
     if (width > height) {
       if (width > MAX_WIDTH) {
@@ -101,11 +121,12 @@ function resize(file, toWidth, toHeight) {
         height = MAX_HEIGHT;
       }
     }
+    
     canvas.width = width;
     canvas.height = height;
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0, width, height);
+    ctx.fill();
     
     //document.getElementsByClassName("jumbotron")[0].append(img);
-    
 }
