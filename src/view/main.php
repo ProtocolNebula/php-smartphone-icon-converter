@@ -31,4 +31,8 @@ exportValueToJS('MAX_FILE_SIZE', MAX_FILE_SIZE);
 ?>
 </script>
 
+<script src="public/js/thumbs.js"></script>
 <script src="public/js/file_uploader.js"></script>
+
+<script src="public/js/filesaver.min.js"></script>
+<script src="public/js/jszip.min.js"></script>

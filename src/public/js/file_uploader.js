@@ -1,3 +1,8 @@
+// Global vars
+var img; // Image uploaded
+var ctx; // Canvas context
+var zip; // Zip container
+
 /*
  * Submit form listener
  */
@@ -15,6 +20,12 @@ formSubmit.addEventListener("submit", function(e) {
         alert("You must choose at least 1 OS to export");
         e.preventDefault();
     }
+
+    // New javascript method! Forced from javascript
+    // TODO: Check if "doResize" worked, else redirect to PHP
+    doResize(img);
+    //e.preventDefault();
+    
     
     return false;
 });
@@ -38,7 +49,7 @@ function checkFile() {
         //    img.src = window.URL.createObjectURL(file);
         
         // Abrimos la imagen y preparamos un callback para cuando haya cargado
-        var img = document.createElement("img");
+        img = document.createElement("img");
         img.onload = function() { doResize(img); };
   
         // Cargamos en memoria la imagen
@@ -68,86 +79,38 @@ function checkFileMime(file) {
 }
 
 
-/*
- * Real time conversion
- */
-/*function readImage(file) {
-    var input = file.target;
-
-    var reader = new FileReader();
-    reader.onload = function(){
-      var dataURL = reader.result;
-      var output = document.getElementById('output');
-      output.src = dataURL;
-    };
-    reader.readAsDataURL(input.files[0]);
-}*/
-
 /**
  * Redimensiona la imagen a los tamaños necesarios
  * @param {type} img
  * @returns {undefined}
  */
-var ctx;
-function doResize(img) {
 
+
+function doResize(img) {
+    zip = new JSZip();
+    
+    // TODO: Foreach all files
     resize(img, 100, 300);
+    //addToZip(name);
     
-    var save = new Image();
-    save.src = canvas.toDataURL();
-    
-    //var imgContent = canvas.toDataURL("image/jpg");
-    var imgContent = save.src.substr(save.src.indexOf(',')+1);
-    
-    console.log(imgContent);
-    
-    
-    var zip = new JSZip();
-    //zip.file("Hello.txt", "Hello World\n");
-    var img = zip.folder("images");
-    img.file("smile.jpeg", imgContent, {base64: true});
-    //img.file("smile.jpg", imgContent, {binary: true});
+    // Generate ZIP file to download
     zip.generateAsync({type:"blob"})
     .then(function(content) {
         // see FileSaver.js
-        saveAs(content, "converted.zip");
+        saveAs(content, "Mobile-Icons.zip");
     });
-
 }
 
-/**
- * Redimensiona la imagen a un tamaño especifico
- * @param {type} img
- * @param {type} toWidth
- * @param {type} toHeight
- * @link https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
- * @returns {undefined}
- */
-function resize(img, toWidth, toHeight) {
-
-    var MAX_WIDTH = 800;
-    var MAX_HEIGHT = 600;
+function addToZip(name) {
+    var save = new Image();
+    save.src = canvas.toDataURL();
     
-    var width = img.naturalWidth;
-    var height = img.naturalHeight;
-
-    if (width > height) {
-      if (width > MAX_WIDTH) {
-        height *= MAX_WIDTH / width;
-        width = MAX_WIDTH;
-      }
-    } else {
-      if (height > MAX_HEIGHT) {
-        width *= MAX_HEIGHT / height;
-        height = MAX_HEIGHT;
-      }
-    }
+    // Read image from canvas
+    //var imgContent = canvas.toDataURL("image/jpg");
+    var imgContent = save.src.substr(save.src.indexOf(',')+1);
     
-    canvas.width = width;
-    canvas.height = height;
-    ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0, width, height);
-    ctx.fill();
-    
-    //document.getElementsByClassName("jumbotron")[0].append(img);
+    // Add image to ZIP
+    zip.file(name, imgContent, {base64: true});
+    //var img = zip.folder("images");
+    //img.file("smile.jpg", imgContent, {binary: true});
 }
