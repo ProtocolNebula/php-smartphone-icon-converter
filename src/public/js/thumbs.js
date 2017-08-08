@@ -1,5 +1,5 @@
 /**
- * Este archivo gestiona la conversion de las imagenes
+ * This file convert image to other sizes
  * @type type
  */
 
@@ -21,7 +21,7 @@
 
 
 /**
- * Redimensiona la imagen a un tamaño especifico
+ * Resize the image to specific size
  * @param {type} img
  * @param {type} toWidth
  * @param {type} toHeight

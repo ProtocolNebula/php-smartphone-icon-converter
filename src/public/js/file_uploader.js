@@ -80,12 +80,10 @@ function checkFileMime(file) {
 
 
 /**
- * Redimensiona la imagen a los tamaños necesarios
- * @param {type} img
+ * Resize the image to all required sizes
+ * @param {Object} img Image object readed from local machine
  * @returns {undefined}
  */
-
-
 function doResize(img) {
     zip = new JSZip();
     
@@ -101,7 +99,13 @@ function doResize(img) {
     });
 }
 
-function addToZip(name) {
+/**
+ * Read the canvas content and add the image to ZIP file
+ * @param {string} name Image name
+ * @param {string} parent Parent Path (FOLDER1/FOLDER2/...)
+ * @returns {undefined}
+ */
+function addToZip(name, parent) {
     var save = new Image();
     save.src = canvas.toDataURL();
     
